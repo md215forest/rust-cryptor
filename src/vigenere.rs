@@ -1,7 +1,7 @@
-static VIGENERE_KEY: &str = "arm";
+const VIGENERE_KEY: &str = "arm";
+const ALPHABET: &str = "abcdefghijklmnopqrstuvwxyz";
 
 pub fn create_vigenere_spuare() -> Vec<Vec<char>> {
-    const ALPHABET: &str = "abcdefghijklmnopqrstuvwxyz";
     let mut vigenere_square = Vec::new();
     for i in 0..26 {
         let start = ALPHABET[i..].to_string();
@@ -50,14 +50,17 @@ mod tests {
     #[test]
     fn test_create_vigenere_spuare() {
         let vigenere_square = create_vigenere_spuare();
-        println!("{}, {}", vigenere_square[0][0], vigenere_square[0][1]);
+        assert_eq!(vigenere_square[0][0], 'a');
+        assert_eq!(vigenere_square[0][25], 'z');
+        assert_eq!(vigenere_square[25][0], 'z');
+        assert_eq!(vigenere_square[25][25], 'y');
     }
 
     #[test]
     fn test_encrypt() {
-        let plaintext = "cOde";
+        let plaintext = "code";
         let encrypted = encrypt(plaintext);
-        println!("{}", encrypted);
+        assert_eq!(encrypted, "cfpe");
     }
 
     #[test]
