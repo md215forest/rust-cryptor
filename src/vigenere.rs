@@ -20,7 +20,7 @@ fn get_key(index: usize) -> char {
 
 pub fn encrypt(text: &str) -> String {
     let vigenere_square = create_vigenere_spuare();
-    let mut encoded = String::new();
+    let mut encrypted_text = String::new();
     let mut key_index = 0;
     for c in text.chars() {
         if c.is_ascii_alphabetic() {
@@ -29,18 +29,18 @@ pub fn encrypt(text: &str) -> String {
             let key = get_key(key_index);
             let code =
                 vigenere_square[(key as u8 - b'a') as usize][(lower_c as u8 - b'a') as usize];
-            let encoded_char = if is_lower {
+            let encrypted_char = if is_lower {
                 code
             } else {
                 code.to_uppercase().to_string().chars().next().unwrap()
             };
-            encoded.push(encoded_char);
+            encrypted_text.push(encrypted_char);
             key_index += 1;
         } else {
-            encoded.push(c);
+            encrypted_text.push(c);
         }
     }
-    encoded
+    encrypted_text
 }
 
 #[cfg(test)]
