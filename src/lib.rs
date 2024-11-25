@@ -1,5 +1,7 @@
-mod vigenere;
+mod encryption;
+
+pub use crate::encryption::*;
 
 pub fn encrypt(text: &str) -> String {
-    vigenere::encrypt(text)
+    encryption::encrypt(EncryptionType::Vigenere, text)
 }
